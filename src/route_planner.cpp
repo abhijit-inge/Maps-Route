@@ -36,8 +36,9 @@ void RoutePlanner::AStarSearch(){
     // return;
     // cout<<"here";
     start_node->visited=true;
-    open_list.push_back(start_node);
+   open_list.push_back(start_node);
     RouteModel::Node *current_node=nullptr;
+
     while(open_list.size()>0){
         current_node=NextNode();
         if(current_node->distance(*end_node)==0){
@@ -67,14 +68,13 @@ return _1st->h_value+_1st->g_value<_2nd->h_value+_2nd->g_value;
         void RoutePlanner::AddNeighbors(RouteModel::Node *current_node){
             current_node->FindNeighbors();
             for(auto n:current_node->neighbors){
-                n.parent=current_node;
-                                                RouteModel::Node *ptr=&n;
+                n->parent=current_node;
 
-                n.g_value=current_node->g_value+current_node->distance(n);
+                n->g_value=current_node->g_value+current_node->distance(*n);
 
-               // n.h_value=CalculateHValue(ptr);
-                open_list.push_back(ptr);
-                n.visited=true;
+               n->h_value=CalculateHValue(n);
+                open_list.push_back(n);
+                n->visited=true;
             }
         }
 

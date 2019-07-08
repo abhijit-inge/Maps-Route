@@ -49,7 +49,7 @@ void RouteModel::Node::FindNeighbors(){
   for(auto & road:parent_model->node_to_road[this->index]){
     RouteModel::Node *new_neighbor=this->FindNeighbor(parent_model->Ways()[road->way].nodes);
     if(new_neighbor){
-      this->neighbors.push_back(*new_neighbor);
+      this->neighbors.emplace_back(new_neighbor);
 
     }
   }

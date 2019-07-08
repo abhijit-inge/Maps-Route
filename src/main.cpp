@@ -59,6 +59,7 @@ int main(int argc, const char **argv)
 
     // Perform search and render results.
     RoutePlanner route_planner{model, 10, 10, 90, 90};
+    cout<<"here in main";
     route_planner.AStarSearch();
     Render render{model};
     cout << "distance is "<<route_planner.GetDistance();
